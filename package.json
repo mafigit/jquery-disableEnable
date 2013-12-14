@@ -1,0 +1,10 @@
+{
+  "name": "jquery-disable-enable-plugin",
+  "version": "1.0.0",
+  "scripts": {
+    "uglify": "./node_modules/uglify-js/bin/uglifyjs jquery.disableEnable.js > jquery.disableEnable.min.js"
+  },
+  "dependencies": {
+    "uglify-js": "*"
+  }
+}

@@ -6,6 +6,7 @@ jquery-disableEnable
  This plugin disables or enables inputfields, textareas and buttons
  according to the state of radiobuttons, checkboxes or dropdownvalues.
 
+
 ##How to
  Each checkbox/radiobutton should have the folowing attributes:
  - data-disable (contains all inputfields that should be disabled.
@@ -47,3 +48,7 @@ jquery-disableEnable
     <input id='input8'><br>
     <input id='input9'><br>
     <input id='input10'><br>
+
+##Minify it
+    npm install
+    npm run-script uglify

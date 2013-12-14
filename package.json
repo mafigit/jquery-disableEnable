@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "uglify": "./node_modules/uglify-js/bin/uglifyjs jquery.disableEnable.js > jquery.disableEnable.min.js",
-    "test": "./node_modules/casperjs/bin/casperjs test test/test.js"
+    "test": "./node_modules/casperjs/bin/casperjs test test/test.js",
+    "lint": "./node_modules/jshint/bin/jshint jquery.disableEnable.js"
   },
   "dependencies": {
     "uglify-js": "*",
+    "jshint": "*",
     "casperjs": "*"
   }
 }

@@ -71,9 +71,9 @@
         process_checkbox_data(selector, true);
       } else {
         if(selector.is(':checked')) {
-          process_checkbox_data(selector, invert)
+          process_checkbox_data(selector, invert);
         } else {
-          process_checkbox_data(selector, !invert)
+          process_checkbox_data(selector, !invert);
         }
       }
     };
@@ -123,12 +123,12 @@
             if(k === dropdown.val()) {
               $.each(v.e,function(i,el) {
                 enable_field(el);
-              })
+              });
               $.each(v.d,function(i,el) {
                 disable_field(el);
-              })
+              });
             }
-          })
+          });
         }
 
         if($(el).data('disableflag') && $(el).hasClass(trigger_selector)) {
@@ -151,11 +151,11 @@
     if($("." + trigger_selector).is('select')) {
       $("." + trigger_selector).change(function() {
         state_check();
-      })
+      });
     } else {
       $("." + trigger_selector).click(function() {
         state_check();
-      })
+      });
     }
     state_check();
   };

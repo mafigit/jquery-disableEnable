@@ -52,3 +52,6 @@ jquery-disableEnable
 ##Minify it
     npm install
     npm run-script uglify
+
+##Run tests
+    npm run-script test

@@ -1,29 +1,20 @@
-jquery-disableEnable
-====================
-
- jQuery disable/enable-Plugin
-
- This plugin disables or enables inputfields, textareas and buttons
- according to the state of radiobuttons, checkboxes or dropdownvalues.
-
-##How to
- Each checkbox/radiobutton should have the folowing attributes:
- - data-disable (contains all inputfields that should be disabled.
-   Only relevant with radiobuttons)
- - data-enable (contains all inputfields that should be enabled)
- - 'trigger_disable_enable' class(can be changed)
-
-##Initialisation
-    $(function() {
-      $(".trigger_disable_enable").disableEnable();
-    });
-
-##Simple checkbox example
+<html>
+  <head>
+    <script type='text/javascript' src='resources/jquery-2.0.3.min.js'></script>
+    <script type='text/javascript' src='../jquery.disableEnable.js'></script>
+    <script>
+      $(function() {
+        $(".trigger_disable_enable").disableEnable();
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Disable/Enable Testpage</h1>
+    <h2>Simple Example</h2>
     <input id="checkbox1" class="trigger_disable_enable" data-enable='["#input1"]' type="checkbox" name="option1" value="test"><br>
     <input id="input1" type="test" name="field1">
 
-##More complex checkbox example
- Lets asume that you have one checkbox that disables another checkbox and so on so on
+    <h2>More Complex Example</h2>
     <input id="checkbox2" class="trigger_disable_enable" data-enable='["#input2","#input3","#checkbox3"]' type="checkbox" name="option1" value="test"><br>
     <input id="input2" type="test" name="field2"><br>
     <input id="input3" type="test" name="field3"><br>
@@ -36,9 +27,7 @@ jquery-disableEnable
     <input id="input6" type="test" name="field6"><br>
     <input id="input7" type="test" name="field7"><br>
 
-##Dropdown example
- You can disable and enable fields arccording to the current value of a dropdown.
-
+    <h2>Dropdown Example</h2>
     <select id='dropdown1' class='trigger_disable_enable' data-dropdown='{"value1":{"e":["#input8","#input9"],"d":["#input10"]},"value2":{"e":["#input10"],"d":["#input8","#input9"]}}'>
       <option value="value1">A</option>
       <option value="value2">B</option>
@@ -47,3 +36,5 @@ jquery-disableEnable
     <input id='input8'><br>
     <input id='input9'><br>
     <input id='input10'><br>
+  </body>
+</html>

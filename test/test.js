@@ -42,7 +42,7 @@ casper.then(function(){
     });
   });
 
-  this.test.begin('Checkbox2 click test', 7, function checkbox2_click(test) {
+  this.test.begin('Checkbox recursive click test', 25, function checkbox2_click(test) {
 
     test.assert(casper.evaluate(function () {
       return $('#input2').attr('disabled') === 'disabled';
@@ -55,6 +55,26 @@ casper.then(function(){
     test.assert(casper.evaluate(function () {
       return $('#checkbox3').attr('disabled') === 'disabled';
     }), "#checkbox3 is disabled");
+
+    test.assert(casper.evaluate(function () {
+      return $('#input4').attr('disabled') === 'disabled';
+    }), "#input4 is disabled");
+
+    test.assert(casper.evaluate(function () {
+      return $('#input5').attr('disabled') === 'disabled';
+    }), "#input5 is disabled");
+
+    test.assert(casper.evaluate(function () {
+      return $('#checkbox4').attr('disabled') === 'disabled';
+    }), "#checkbox4 is disabled");
+
+    test.assert(casper.evaluate(function () {
+      return $('#input6').attr('disabled') === 'disabled';
+    }), "#input6 is disabled");
+
+    test.assert(casper.evaluate(function () {
+      return $('#input7').attr('disabled') === 'disabled';
+    }), "#input6 is disabled");
 
     casper.click('#checkbox2');
     casper.wait(100, function() {
@@ -74,8 +94,68 @@ casper.then(function(){
       test.assert(casper.evaluate(function () {
         return $('#checkbox3').attr('disabled') === undefined;
       }), "#checkbox3 is enabled");
+      //new tests
+      test.assert(casper.evaluate(function () {
+        return $('#input4').attr('disabled') === 'disabled';
+      }), "#input4 is disabled");
 
-      test.done();
+      test.assert(casper.evaluate(function () {
+        return $('#input5').attr('disabled') === 'disabled';
+      }), "#input5 is disabled");
+
+      test.assert(casper.evaluate(function () {
+        return $('#input6').attr('disabled') === 'disabled';
+      }), "#input6 is disabled");
+
+      test.assert(casper.evaluate(function () {
+        return $('#input7').attr('disabled') === 'disabled';
+      }), "#input7 is disabled");
+
+      casper.click('#checkbox3');
+      casper.wait(100, function() {
+
+        test.assert(casper.evaluate(function () {
+          return $('#checkbox3').is(':checked');
+        }), "#checkbox3 is checked after click");
+
+        test.assert(casper.evaluate(function () {
+          return $('#input4').attr('disabled') === undefined;
+        }), "#input4 is enabled");
+
+        test.assert(casper.evaluate(function () {
+          return $('#input5').attr('disabled') === undefined;
+        }), "#input5 is enabled");
+
+        test.assert(casper.evaluate(function () {
+          return $('#checkbox4').attr('disabled') === undefined;
+        }), "#checkbox4 is enabled");
+
+        test.assert(casper.evaluate(function () {
+          return $('#input6').attr('disabled') === 'disabled';
+        }), "#input6 is disabled");
+
+        test.assert(casper.evaluate(function () {
+          return $('#input7').attr('disabled') === 'disabled';
+        }), "#input7 is disabled");
+
+        casper.click('#checkbox4');
+        casper.wait(100, function() {
+
+          test.assert(casper.evaluate(function () {
+            return $('#checkbox4').is(':checked');
+          }), "#checkbox4 is checked after click");
+
+          test.assert(casper.evaluate(function () {
+            return $('#input6').attr('disabled') === undefined;
+          }), "#input6 is enabled");
+
+          test.assert(casper.evaluate(function () {
+            return $('#input7').attr('disabled') === undefined
+          }), "#input7 is enabled");
+
+          test.done();
+        });
+      });
     });
   });
 });

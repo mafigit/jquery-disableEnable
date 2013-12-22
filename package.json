@@ -1,6 +1,6 @@
 {
   "name": "jquery-disable-enable-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "uglify": "./node_modules/uglify-js/bin/uglifyjs jquery.disableEnable.js > jquery.disableEnable.min.js",
     "test": "./node_modules/casperjs/bin/casperjs test test/test.js",

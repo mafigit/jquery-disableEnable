@@ -49,6 +49,25 @@ jquery-disableEnable
     <input id='input9'><br>
     <input id='input10'><br>
 
+##Callback example
+ You need to passover an options hash in the following manner:
+
+    $(function() {
+      var options = {};
+      options.disable_callbacks = {
+        '#input1' : function(selector) {
+           $('#callback_test').remove();
+        }
+      }
+      options.enable_callbacks = {
+        '#input1' : function(selector) {
+          if($('#callback_test').length === 0) {
+            $('body').append('<div id="callback_test">TEST</div>');
+          }
+        }
+      }
+      $(".trigger_disable_enable").disableEnable(options);
+
 ##Minify it
     npm install
     npm run-script uglify

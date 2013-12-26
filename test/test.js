@@ -42,6 +42,41 @@ casper.then(function(){
     });
   });
 
+  this.test.begin('Callback test', 2, function checkbox2_click(test) {
+    if(casper.evaluate(function() { return $('#checkbox1').is(':checked'); })) {
+      casper.click('#checkbox1');
+      casper.wait(100, function() {
+
+        test.assert(casper.evaluate(function () {
+          return $('#callback_test').length === 0;
+        }), "test disable_callback");
+
+        casper.click('#checkbox1');
+        casper.wait(100, function() {
+
+          test.assert(casper.evaluate(function () {
+            return $('#callback_test').length > 0;
+          }), "test enable_callback");
+          test.done();
+        });
+      });
+    } else {
+
+      test.assert(casper.evaluate(function () {
+        return $('#callback_test').length === 0;
+      }), "test disable_callback");
+
+      casper.click('#checkbox1');
+      casper.wait(100, function() {
+
+        test.assert(casper.evaluate(function () {
+          return $('#callback_test').length > 0;
+        }), "test enable_callback");
+        test.done();
+      });
+    };
+  });
+
   this.test.begin('Checkbox recursive click test', 25, function checkbox2_click(test) {
 
     test.assert(casper.evaluate(function () {

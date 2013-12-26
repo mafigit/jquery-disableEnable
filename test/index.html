@@ -4,7 +4,20 @@
     <script type='text/javascript' src='../jquery.disableEnable.js'></script>
     <script>
       $(function() {
-        $(".trigger_disable_enable").disableEnable();
+        var options = {};
+        options.disable_callbacks = {
+          '#input1' : function(selector) {
+            $('#callback_test').remove();
+          }
+        }
+        options.enable_callbacks = {
+          '#input1' : function(selector) {
+            if($('#callback_test').length === 0) {
+              $('body').append('<div id="callback_test">TEST</div>');
+            }
+          }
+        }
+        $(".trigger_disable_enable").disableEnable(options);
       });
     </script>
   </head>

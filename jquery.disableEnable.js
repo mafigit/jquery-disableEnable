@@ -1,9 +1,41 @@
 (function( $ ) {
-  $.fn.disableEnable = function (alternative_selector) {
-    var trigger_selector = alternative_selector || 'trigger_disable_enable';
+  $.fn.disableEnable = function (options) {
+    var options = options || {}
+
+    var disable_callbacks = options.disable_callbacks || {};
+    var enable_callbacks = options.enable_callbacks || {};
+
+    var trigger_selector = options.selector || 'trigger_disable_enable';
+
+    var use_disable_callbacks = function(selector) {
+      $.each(disable_callbacks, function(name, callback) {
+        if(selector === name) {
+          callback(selector);
+          return true;
+        } else {
+          return false;
+        };
+      });
+    }
+
+    var use_enable_callbacks = function(selector) {
+      $.each(enable_callbacks, function(name, callback) {
+        if(selector === name) {
+          callback(selector);
+          return true;
+        } else {
+          return false;
+        };
+      });
+    }
 
     var enable_field = function(selector) {
       var obj_to_enable = $(selector);
+      if(!$.isEmptyObject(enable_callbacks)) {
+        if(use_enable_callbacks(selector)) {
+          return;
+        }
+      }
       if (obj_to_enable.hasClass('multiselect')) {
         obj_to_enable.tokenInput('toggleDisabled', false);
         $(obj_to_enable.parent()).find('a.create_new_inline')
@@ -30,6 +62,11 @@
 
     var disable_field = function(selector) {
       var obj_to_disable = $(selector);
+      if(!$.isEmptyObject(disable_callbacks)) {
+        if(use_disable_callbacks(selector)) {
+          return;
+        }
+      }
       if (obj_to_disable.hasClass('multiselect')) {
         obj_to_disable.tokenInput('toggleDisabled', true);
         $(obj_to_disable.parent()).find('a.create_new_inline')

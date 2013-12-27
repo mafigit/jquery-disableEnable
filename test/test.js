@@ -42,7 +42,7 @@ casper.then(function(){
     });
   });
 
-  this.test.begin('Callback test', 2, function checkbox2_click(test) {
+  this.test.begin('Callback test', 2, function callback_test(test) {
     if(casper.evaluate(function() { return $('#checkbox1').is(':checked'); })) {
       casper.click('#checkbox1');
       casper.wait(100, function() {

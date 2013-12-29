@@ -5,6 +5,10 @@
     <script>
       $(function() {
         var options = {};
+        options.enable_definitions = {
+          '#checkbox5': ['#input8','#input9','#checkbox6'],
+          '#checkbox6': ['#input10','#input11']
+        }
         options.disable_callbacks = {
           '#input1' : function(selector) {
             $('#callback_test').remove();
@@ -40,14 +44,29 @@
     <input id="input6" type="test" name="field6"><br>
     <input id="input7" type="test" name="field7"><br>
 
+    <h2>Self defined objects</h2>
+    <input id="checkbox5" class="trigger_disable_enable" type="checkbox" name="option1" value="test"><br>
+    <input id="input8" type="test" name="field8"><br>
+    <input id="input9" type="test" name="field9"><br>
+
+    <input id="checkbox6" class="trigger_disable_enable" type="checkbox" name="option1" value="test"><br>
+    <input id="input10" type="test" name="field10"><br>
+    <input id="input11" type="test" name="field11"><br>
+
     <h2>Dropdown Example</h2>
-    <select id='dropdown1' class='trigger_disable_enable' data-dropdown='{"value1":{"e":["#input8","#input9"],"d":["#input10"]},"value2":{"e":["#input10"],"d":["#input8","#input9"]}}'>
+    <select id='dropdown1' class='trigger_disable_enable' data-dropdown='{"value1":{"e":["#input12","#input13"],"d":["#input14"]},"value2":{"e":["#input14"],"d":["#input12","#input13"]}}'>
       <option value="value1">A</option>
       <option value="value2">B</option>
     </select><br>
 
-    <input id='input8'><br>
-    <input id='input9'><br>
-    <input id='input10'><br>
+    <input id='input12'><br>
+    <input id='input13'><br>
+    <input id='input14'><br>
+
+    <h2>Radiobutton Example</h2>
+    <input id='radio1' class='trigger_disable_enable' data-disable='["#input16"]' data-enable='["#input15"]' type="radio" name="test_radiobutton" value="Value1" checked> Value1<br>
+    <input id='radio2' class='trigger_disable_enable' data-disable='["#input15"]' data-enable='["#input16"]' type="radio" name="test_radiobutton" value="Value2"> Value2<br>
+    <input id='input15'><br>
+    <input id='input16'><br>
   </body>
 </html>

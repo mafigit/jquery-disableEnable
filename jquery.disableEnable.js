@@ -1,9 +1,23 @@
 (function( $ ) {
   $.fn.disableEnable = function (options) {
-    var options = options || {}
+    options = options || {};
 
     var disable_callbacks = options.disable_callbacks || {};
     var enable_callbacks = options.enable_callbacks || {};
+
+    var disable_definitions = options.disable_definitions || {};
+    var enable_definitions = options.enable_definitions || {};
+
+    var object_defined_selectors = (function() {
+      var selectors = [];
+      $.each(disable_definitions, function(key, value) {
+        selectors.push(key);
+      });
+      $.each(enable_definitions, function(key, value) {
+        selectors.push(key);
+      });
+      return selectors;
+    })();
 
     var trigger_selector = options.selector || 'trigger_disable_enable';
 
@@ -14,9 +28,9 @@
           return true;
         } else {
           return false;
-        };
+        }
       });
-    }
+    };
 
     var use_enable_callbacks = function(selector) {
       $.each(enable_callbacks, function(name, callback) {
@@ -25,9 +39,9 @@
           return true;
         } else {
           return false;
-        };
+        }
       });
-    }
+    };
 
     var enable_field = function(selector) {
       var obj_to_enable = $(selector);
@@ -93,7 +107,18 @@
     };
 
     var process_checkbox_data = function(selector, disableflag) {
-      $.each(selector.data('enable'), function(i, el) {
+
+      var selectors = [];
+      if($.inArray("#" + selector.attr('id'), object_defined_selectors) !== -1) {
+        $.each(enable_definitions, function(key,value) {
+          if(key === "#" + selector.attr('id')) {
+            selectors = value;
+          }
+        });
+      } else {
+        selectors = selector.data('enable');
+      }
+      $.each(selectors, function(i, el) {
         if(disableflag) {
           disable_field(el + "");
         } else {
@@ -128,8 +153,30 @@
     };
 
     var radio_button_enable_disable_fields = function(selector) {
-      if(selector.data('enable')) {
-        $.each(selector.data('enable'),function(i, el) {
+      var selectors_enable = [];
+      var selectors_disable = [];
+      if($.inArray("#" + selector.attr('id'), object_defined_selectors) !== -1) {
+        $.each(enable_definitions, function(key,value) {
+          if(key === "#" + selector.attr('id')) {
+            selectors_enable = value;
+          }
+        });
+      } else {
+        selectors_enable = selector.data('enable');
+      }
+
+      if($.inArray("#" + selector.attr('id'), object_defined_selectors) !== -1) {
+        $.each(disable_definitions, function(key,value) {
+          if(key === "#" + selector.attr('id')) {
+            selectors_disable = value;
+          }
+        });
+      } else {
+        selectors_disable = selector.data('disable');
+      }
+
+      if(selectors_enable) {
+        $.each(selectors_enable,function(i, el) {
           check_for_trigger(selector, false, el);
           if(selector.attr('disabled') === 'disabled') {
             disable_field(el + "");
@@ -139,8 +186,8 @@
         });
       }
 
-      if(selector.data('disable')) {
-        $.each(selector.data('disable'),function(i, el) {
+      if(selectors_disable) {
+        $.each(selectors_disable,function(i, el) {
           check_for_trigger(selector, true, el);
           disable_field(el + "");
         });

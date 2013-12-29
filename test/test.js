@@ -77,6 +77,26 @@ casper.then(function(){
     };
   });
 
+  this.test.begin('Radiobutton test', 4, function radionbutton_test(test) {
+    test.assert(casper.evaluate(function () {
+      return $('#input15').attr('disabled') === undefined;
+    }), "#input15 is enabled");
+    test.assert(casper.evaluate(function () {
+      return $('#input16').attr('disabled') === 'disabled';
+    }), "#input16 is disabled");
+
+    casper.click('#radio2');
+    casper.wait(100, function() {
+      test.assert(casper.evaluate(function () {
+        return $('#input15').attr('disabled') === 'disabled';
+      }), "#input15 is disabled");
+      test.assert(casper.evaluate(function () {
+        return $('#input16').attr('disabled') === undefined;
+      }), "#input16 is enabled");
+      test.done();
+    });
+  });
+
   this.test.begin('Checkbox recursive click test', 25, function checkbox2_click(test) {
 
     test.assert(casper.evaluate(function () {

@@ -13,6 +13,7 @@ jquery-disableEnable
    Only relevant with radiobuttons.)
  - data-enable (contains all inputfields that should be enabled)
  - 'trigger_disable_enable' class(can be changed)
+
  NOTE: You can passover objects with the relevant selectors instead of data-fields
 
     options.enable_definitions = {

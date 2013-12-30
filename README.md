@@ -10,9 +10,15 @@ jquery-disableEnable
 ##How to
  Each checkbox/radiobutton should have the folowing attributes:
  - data-disable (contains all inputfields that should be disabled.
-   Only relevant with radiobuttons)
+   Only relevant with radiobuttons.)
  - data-enable (contains all inputfields that should be enabled)
  - 'trigger_disable_enable' class(can be changed)
+ NOTE: You can passover objects with the relevant selectors instead of data-fields
+
+    options.enable_definitions = {
+       '#checkbox5': ['#input8','#input9','#checkbox6'],
+       '#checkbox6': ['#input10','#input11']
+    }
 
 ##Initialisation
     $(function() {

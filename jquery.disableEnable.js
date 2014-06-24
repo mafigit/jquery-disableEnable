@@ -25,6 +25,9 @@ https://github.com/mafigit/jquery-disableEnable
 
 (function( $ ) {
   $.fn.disableEnable = function (options) {
+
+    var that = this;
+
     options = options || {};
 
     var disable_callbacks = options.disable_callbacks || {};
@@ -85,7 +88,7 @@ https://github.com/mafigit/jquery-disableEnable
 
       } else if (obj_to_enable.hasClass('btn')) {
         obj_to_enable.removeAttr('disabled');
-        if (obj_to_enable.data('href') && obj_to_enable.attr("href") == "#") {
+        if (obj_to_enable.data('href') && obj_to_enable.attr("href") === "#") {
           obj_to_enable.attr('href', obj_to_enable.data('href'));
           obj_to_enable.data('href', "");
         }
@@ -117,7 +120,7 @@ https://github.com/mafigit/jquery-disableEnable
       } else if (obj_to_disable.hasClass('btn')) {
         obj_to_disable.attr('disabled','disabled');
         if (obj_to_disable.attr('href') &&
-            obj_to_disable.attr('href') != "#") {
+            obj_to_disable.attr('href') !== "#") {
           obj_to_disable.data('href', obj_to_disable.attr('href'));
           obj_to_disable.attr('href', "#");
         }
@@ -134,7 +137,8 @@ https://github.com/mafigit/jquery-disableEnable
     var process_checkbox_data = function(selector, disableflag) {
 
       var selectors = [];
-      if($.inArray("#" + selector.attr('id'), object_defined_selectors) !== -1) {
+      var selector_id = "#" + selector.attr('id');
+      if($.inArray(selector_id, object_defined_selectors) !== -1) {
         $.each(enable_definitions, function(key,value) {
           if(key === "#" + selector.attr('id')) {
             selectors = value;
@@ -180,7 +184,8 @@ https://github.com/mafigit/jquery-disableEnable
     var radio_button_enable_disable_fields = function(selector) {
       var selectors_enable = [];
       var selectors_disable = [];
-      if($.inArray("#" + selector.attr('id'), object_defined_selectors) !== -1) {
+      var selector_id = "#" + selector.attr('id');
+      if($.inArray(selector_id, object_defined_selectors) !== -1) {
         $.each(enable_definitions, function(key,value) {
           if(key === "#" + selector.attr('id')) {
             selectors_enable = value;
@@ -190,7 +195,7 @@ https://github.com/mafigit/jquery-disableEnable
         selectors_enable = selector.data('enable');
       }
 
-      if($.inArray("#" + selector.attr('id'), object_defined_selectors) !== -1) {
+      if($.inArray(selector_id, object_defined_selectors) !== -1) {
         $.each(disable_definitions, function(key,value) {
           if(key === "#" + selector.attr('id')) {
             selectors_disable = value;
@@ -220,7 +225,7 @@ https://github.com/mafigit/jquery-disableEnable
     };
 
     var state_check = function() {
-      $.each($("." + trigger_selector), function(i, el) {
+      $.each(that, function(i, el) {
         if($(el).attr('type') === 'checkbox') {
           checkbox_enable_disable_fields($(el));
         } else if($(el).is(':checked')) {
@@ -257,15 +262,18 @@ https://github.com/mafigit/jquery-disableEnable
       });
     };
 
-    if($("." + trigger_selector).is('select')) {
-      $("." + trigger_selector).change(function() {
-        state_check();
-      });
-    } else {
-      $("." + trigger_selector).click(function() {
-        state_check();
-      });
-    }
+    that.each(function(idx, elem) {
+      elem = $(elem);
+      if(elem.is('select')) {
+        elem.change(function() {
+          state_check();
+        });
+      } else {
+        elem.click(function() {
+          state_check();
+        });
+      }
+    });
     state_check();
   };
 }( jQuery ));
